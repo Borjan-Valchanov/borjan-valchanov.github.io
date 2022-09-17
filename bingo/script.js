@@ -177,6 +177,12 @@ function StartBingo(size, quotes) {
 		bingo.appendChild(layer);
 	}
 
+	var githubLink = document.createElement("a");
+	githubLink.className = "github-link";
+	githubLink.href = "https://github.com/Borjan-Valchanov/web-bingo/";
+	githubLink.innerHTML = "Zum GitHub-Projekt";
+	bingo.appendChild(githubLink);
+
 	document.body.appendChild(bingo);
 }
 
