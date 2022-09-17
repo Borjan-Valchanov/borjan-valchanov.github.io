@@ -1,0 +1,81 @@
+body {
+	overflow: hidden;
+	font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	margin: 0px;
+	padding: 0px;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+}
+
+.github-link {
+	position: absolute;
+	text-decoration: none;
+	bottom: 20px;
+}
+
+.button {
+	border-radius: 100vw;
+	padding: 10px;
+	margin: 10px;
+	border-style: none;
+}
+
+.large-button {
+	background-color: #5a8cff;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	letter-spacing: .75px;
+	text-shadow: .5px .5px black;
+}
+
+.num-button {
+	color: black;
+	text-shadow: .5px .5px #ffdfdf;
+	background-color: #cacbde;
+	font-size: 24px;
+	font-weight: 600;
+	padding: 0px;
+	width: 30px;
+	height: 30px;
+}
+
+.tile {
+	border-radius: 0px;
+	padding: 5px;
+	background-color: #b7bce4;
+}
+
+.tile-text {
+	padding: 0px;
+	margin: 0px;
+	font-weight: 600;
+	font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.tile-clicked {
+	background-color: #24a600;
+}
+
+.tile-text-clicked {
+	color: #ffffff;
+}
+
+.size-display {
+	font-size: 22px;
+	color: black;
+}
+
+.centered {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.layered {
+	flex-direction: column;
+}
