@@ -167,6 +167,7 @@ function StartBingo(size, quotes, randomInsertLookup) {
 			tile.style.width = tileSize + "px";
 			tile.style.height = tileSize + "px";
 			tile.style.borderRadius = (0.08 * tileSize) + "px";
+			tile.style.margin = (0.08 * tileSize) + "px";
 
 			if (quoteQueue.length == 0) {
 				quoteQueue = [...quotes];
@@ -184,7 +185,7 @@ function StartBingo(size, quotes, randomInsertLookup) {
 
 			text.innerHTML = quoteRendered;
 			text.className = "tile-text";
-			text.style.fontSize = ((16 - size) * (16 / 11)) + "px";
+			text.style.fontSize = Math.floor(tileSize * (24 / 211)) + "px";
 			text.style.width = tileSize + "px";
 			text.style.height = tileSize + "px";
 			tile.appendChild(text);
