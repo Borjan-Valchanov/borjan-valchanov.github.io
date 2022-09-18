@@ -1,10 +1,12 @@
-function bingoTemplate(name, quotes) {
+function bingoTemplate(name, quotes, randomInsertLookup) {
 	this.name = name;
 	this.quotes = quotes;
+	this.randomInsertLookup = randomInsertLookup;
 }
 
-bingoTemplateConstructor = {
-
+function randomInsertLookup(keyword, inserts) {
+	this.keyword = keyword;
+	this.inserts = inserts;
 }
 
 herrman_quotes = [
@@ -15,17 +17,33 @@ herrman_quotes = [
 	"Die Damen und Herren",
 	"Ruge, Handy.",
 	"Viel Spaß im nachfolgenden Programm",
-	"Eine(n) kleine(n), niedliche(n), feine(n)...",
+	"Eine$nornot$ kleine$nornot$, niedliche$nornot$, feine$nornot$...",
 	"Moppelkotze",
 	"Ja, aber habt ihr von mir etwas anderes erwartet?",
-	"Essen weg",
+	"$name$, Essen weg",
 	"Wir wollen vergleichen",
 	"Wir befinden uns in der Situation, dass...",
 	"Kein Bodyshaming",
 	"Nach Sek 1 Verordnung...",
 	"Quatsch mit Soße",
-	"Jurij, Mütze."
+	"Jurij, Mütze.",
+	"Wir begeben uns an unsere Plätze",
+	"$name$, hinsetzen."
 ];
+
+herrmann_inserts = [
+	new randomInsertLookup("name", [
+		"Abraham",
+		"Lukas",
+		"Otto",
+		"Ruge",
+		"Konrad"
+	]),
+	new randomInsertLookup("nornot", [
+		"n",
+		""
+	])
+]
 
 hoffmann_quotes = [
 	"Deutsche Sprache, schwierige Sprache",
@@ -36,7 +54,7 @@ hoffmann_quotes = [
 ];
 
 quotemap = [
-	new bingoTemplate("Herr Herrmann", herrman_quotes)
+	new bingoTemplate("Herr Herrmann", herrman_quotes, herrmann_inserts)
 ];
 
 window.onload = function() {
@@ -54,21 +72,21 @@ function MainScreen() {
 		var button = document.createElement("button");
 		button.className = "button large-button";
 		button.innerHTML = element.name;
-		button.onclick = function() {BingoDialog(element.quotes);};
+		button.onclick = function() {BingoDialog(element.quotes, element.randomInsertLookup);};
 		buttonArea.appendChild(button);
 	});
 
 	
 	var githubLink = document.createElement("a");
 	githubLink.className = "github-link";
-	githubLink.href = "https://github.com/Borjan-Valchanov/web-bingo/";
+	githubLink.href = "https://github.com/Borjan-Valchanov/bingo/";
 	githubLink.innerHTML = "Zum GitHub-Projekt";
 	buttonArea.appendChild(githubLink);
 
 	document.body.appendChild(buttonArea);
 }
 
-function BingoDialog(quotes) {
+function BingoDialog(quotes, randomInsertLookup) {
 	BodyReset();
 
 	var dialog = document.createElement("div");
@@ -85,7 +103,7 @@ function BingoDialog(quotes) {
 	var dialogSubmitButton = document.createElement("button");
 	dialogSubmitButton.className = "button large-button";
 	dialogSubmitButton.innerHTML = "Los!";
-	dialogSubmitButton.onclick = function() {StartBingo(size, quotes)};
+	dialogSubmitButton.onclick = function() {StartBingo(size, quotes, randomInsertLookup)};
 
 	var sizeDisplay = document.createElement("label");
 	sizeDisplay.className = "size-display";
@@ -121,14 +139,14 @@ function BingoDialog(quotes) {
 
 	var githubLink = document.createElement("a");
 	githubLink.className = "github-link";
-	githubLink.href = "https://github.com/Borjan-Valchanov/web-bingo/";
+	githubLink.href = "https://github.com/Borjan-Valchanov/bingo/";
 	githubLink.innerHTML = "Zum GitHub-Projekt";
 	dialog.appendChild(githubLink);
 
 	document.body.appendChild(dialog);
 }
 
-function StartBingo(size, quotes) {
+function StartBingo(size, quotes, randomInsertLookup) {
 	BodyReset();
 
 	quoteQueue = [];
@@ -157,7 +175,14 @@ function StartBingo(size, quotes) {
 			quote = Math.floor(Math.random() * quoteQueue.length);
 
 			var text = document.createElement("div");
-			text.innerHTML = quoteQueue[quote];
+
+			quoteRendered = quoteQueue[quote];
+			randomInsertLookup.forEach(element => {
+				chosenInsert = element.inserts[Math.floor(Math.random() * element.inserts.length)];
+				quoteRendered = quoteRendered.replaceAll("$" + element.keyword + "$", chosenInsert);
+			});
+
+			text.innerHTML = quoteRendered;
 			text.className = "tile-text";
 			text.style.fontSize = ((16 - size) * (16 / 11)) + "px";
 			text.style.width = tileSize + "px";
@@ -179,7 +204,7 @@ function StartBingo(size, quotes) {
 
 	var githubLink = document.createElement("a");
 	githubLink.className = "github-link";
-	githubLink.href = "https://github.com/Borjan-Valchanov/web-bingo/";
+	githubLink.href = "https://github.com/Borjan-Valchanov/bingo/";
 	githubLink.innerHTML = "Zum GitHub-Projekt";
 	bingo.appendChild(githubLink);
 
