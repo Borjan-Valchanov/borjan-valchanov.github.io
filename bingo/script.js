@@ -76,12 +76,7 @@ function MainScreen() {
 		buttonArea.appendChild(button);
 	});
 
-	
-	var githubLink = document.createElement("a");
-	githubLink.className = "github-link";
-	githubLink.href = "https://github.com/Borjan-Valchanov/bingo/";
-	githubLink.innerHTML = "Zum GitHub-Projekt";
-	buttonArea.appendChild(githubLink);
+	buttonArea.appendChild(githubLink());
 
 	document.body.appendChild(buttonArea);
 }
@@ -137,11 +132,7 @@ function BingoDialog(quotes, randomInsertLookup) {
 	dialog.appendChild(settingLayer);
 	dialog.appendChild(dialogSubmitButton);
 
-	var githubLink = document.createElement("a");
-	githubLink.className = "github-link";
-	githubLink.href = "https://github.com/Borjan-Valchanov/bingo/";
-	githubLink.innerHTML = "Zum GitHub-Projekt";
-	dialog.appendChild(githubLink);
+	dialog.appendChild(githubLink());
 
 	document.body.appendChild(dialog);
 }
@@ -203,13 +194,18 @@ function StartBingo(size, quotes, randomInsertLookup) {
 		bingo.appendChild(layer);
 	}
 
-	var githubLink = document.createElement("a");
-	githubLink.className = "github-link";
-	githubLink.href = "https://github.com/Borjan-Valchanov/bingo/";
-	githubLink.innerHTML = "Zum GitHub-Projekt";
-	bingo.appendChild(githubLink);
+	bingo.appendChild(githubLink());
 
 	document.body.appendChild(bingo);
+}
+
+function githubLink() {
+	var githubLink = document.createElement("a");
+	githubLink.className = "github-link";
+	githubLink.href = "https://github.com/Borjan-Valchanov/web-bingo/";
+	githubLink.target = "_top";
+	githubLink.innerHTML = "Zum GitHub-Projekt";
+	return githubLink;
 }
 
 function BodyReset() {
