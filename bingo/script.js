@@ -163,11 +163,11 @@ function StartBingo(size, quotes, randomInsertLookup) {
 			tile.className = "button tile";
 
 			bingoSideLength = 0.9 * ((window.innerWidth > window.innerHeight) ? window.innerHeight : window.innerWidth);
-			tileSize = (bingoSideLength - (10 * (size - 1))) / size;
+			tileSize = (bingoSideLength - ((bingoSideLength * (10 / 872.1)) * (size - 1))) / size;
 			tile.style.width = tileSize + "px";
 			tile.style.height = tileSize + "px";
 			tile.style.borderRadius = (0.08 * tileSize) + "px";
-			tile.style.margin = (0.08 * tileSize) + "px";
+			tile.style.margin = (bingoSideLength * (5 / 872.1)) + "px";
 
 			if (quoteQueue.length == 0) {
 				quoteQueue = [...quotes];
