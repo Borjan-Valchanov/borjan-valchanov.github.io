@@ -1,3 +1,8 @@
+const range = (start, end) => {
+    const length = end - start;
+    return Array.from({ length }, (_, i) => start + i);
+}
+
 function bingoTemplate(name, quotes, randomInsertLookup) {
 	this.name = name;
 	this.quotes = quotes;
@@ -17,7 +22,7 @@ herrman_quotes = [
 	"Die Damen und Herren",
 	"Ruge, Handy.",
 	"Viel Spaß im nachfolgenden Programm",
-	"Eine$nornot$ kleine$nornot$, niedliche$nornot$, feine$nornot$...",
+	"Eine$nornot$ kleine$nornot$, feine$nornot$, niedliche$nornot$...",
 	"Moppelkotze",
 	"Ja, aber habt ihr von mir etwas anderes erwartet?",
 	"$name$, Essen weg",
@@ -54,7 +59,12 @@ hoffmann_quotes = [
 ];
 
 quotemap = [
-	new bingoTemplate("Herr Herrmann", herrman_quotes, herrmann_inserts)
+	new bingoTemplate("Herr Herrmann", herrman_quotes, herrmann_inserts),
+	new bingoTemplate("Standard 0 - 50", range(0, 51), []),
+	new bingoTemplate("Standard 50 - 100", range(50, 101), []),
+	new bingoTemplate("Standard 0 - 100", range(0, 101), []),
+	new bingoTemplate("Standard 100 - 200", range(100, 201), []),
+	new bingoTemplate("Standard 0 - 500", range(0, 501), [])
 ];
 
 window.onload = function() {
