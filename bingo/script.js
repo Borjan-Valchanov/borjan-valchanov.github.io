@@ -51,7 +51,6 @@ herrman_quotes = [
 	"Das wage ich zu bezweifeln",
 	"$name:0$, an deinen Platz.",
 	"Kurzer Hinweis",
-	"Kommt zur Ruhe",
 	"$name:0$, Ruhe",
 	"Fatalerweise",
 	"Ich wünsche einen wunderschönen Guten Morgen",
