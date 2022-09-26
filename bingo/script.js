@@ -38,7 +38,7 @@ herrman_quotes = [
 	"Wir wollen vergleichen",
 	"Wir befinden uns in der Situation, dass...",
 	"Kein Bodyshaming",
-	"Nach Sek 1 Verordnung...",
+	"Nach Sek-I-Verordnung...",
 	"Quatsch mit Soße",
 	"Jurij, Mütze.",
 	"Wir begeben uns an unsere Plätze",
