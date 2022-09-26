@@ -102,9 +102,67 @@ hoffmann_quotes = [
 	"Ich ruf dann mal deine Eltern an, schön auf einen Freitagabend."
 ];
 
+halley_de = [
+	"die Liebe",
+	"gewöhnlich",
+	"ziemlich",
+	"hoffen",
+	"sich beeilen",
+	"ein Föhn",
+	"anhalten",
+	"gehören zu",
+	"eine Verteidigung",
+	"unterschiedlich",
+	"tief",
+	"das Tageslicht",
+	"vor (zeitlich)",
+	"sich kennenlernen",
+	"ungefähr",
+	"sich wiedersehen",
+	"unter der Erde",
+	"allein",
+	"sich an etw. erinnern",
+	"eine Neuigkeit",
+	"nett",
+	"gewöhnlich",
+	"vergessen",
+	"an etw. teilnehmen",
+	"ein Gefühl"
+]
+
+halley_fr = [
+	"l’amour",
+	"d’habitude",
+	"assez",
+	"espérer",
+	"se dépêcher",
+	"un séche-cheveux",
+	"s’arrêter",
+	"faire partie de qc",
+	"une défense",
+	"différent(e)",
+	"sous terre",
+	"profond(e)",
+	"le jour",
+	"il y a",
+	"seul(e)",
+	"environ",
+	"se rencontrer",
+	"se revoir",
+	"se souvenir de qc",
+	"une nouvelle",
+	"genti(le)",
+	"courant(e)",
+	"oublier",
+	"participer à qc",
+	"un sentiment"
+]
+
 // Laying out bingo options
 quotemap = [
 	new bingoTemplate("Herr Herrmann", herrman_quotes, herrmann_inserts),
+	new bingoTemplate("Madame Halley (DE)", halley_de, []),
+	new bingoTemplate("Madame Halley (FR)", halley_fr, []),
 	new bingoTemplate("Standard 0 - 50", range(0, 51), []),
 	new bingoTemplate("Standard 50 - 100", range(50, 101), []),
 	new bingoTemplate("Standard 0 - 100", range(0, 101), []),
