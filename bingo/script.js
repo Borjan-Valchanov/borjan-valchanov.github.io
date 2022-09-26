@@ -1,18 +1,27 @@
+//#region Basic function and object definitions
+
+// Define range function
 const range = (start, end) => {
     const length = end - start;
     return Array.from({ length }, (_, i) => start + i);
 }
 
+// Constructor for bingoTemplate object
 function bingoTemplate(name, quotes, randomInsertLookup) {
 	this.name = name;
 	this.quotes = quotes;
 	this.randomInsertLookup = randomInsertLookup;
 }
 
+// Constructor for randomInsertLookup object
 function randomInsertLookup(keyword, inserts) {
 	this.keyword = keyword;
 	this.inserts = inserts;
 }
+
+//#endregion
+
+//#region Bingo Generation Data
 
 herrman_quotes = [
 	"Also ich will dass wir wollen",
@@ -22,10 +31,10 @@ herrman_quotes = [
 	"Die Damen und Herren",
 	"Ruge, Handy.",
 	"Viel Spaß im nachfolgenden Programm",
-	"Eine$nornot$ kleine$nornot$, feine$nornot$, niedliche$nornot$...",
+	"Eine$nornot:0$ $kleinfeinetc:0$$nornot:0$, $kleinfeinetc:1$$nornot:0$, $kleinfeinetc:2$$nornot:0$, $kleinfeinetc:3$$nornot:0$...",
 	"Moppelkotze",
 	"Ja, aber habt ihr von mir etwas anderes erwartet?",
-	"$name$, Essen weg",
+	"$name:0$, Essen weg",
 	"Wir wollen vergleichen",
 	"Wir befinden uns in der Situation, dass...",
 	"Kein Bodyshaming",
@@ -33,7 +42,32 @@ herrman_quotes = [
 	"Quatsch mit Soße",
 	"Jurij, Mütze.",
 	"Wir begeben uns an unsere Plätze",
-	"$name$, hinsetzen."
+	"$name:0$, hinsetzen.",
+	"Kommt zur Ruhe",
+	"Die Lösung hätte ich gerne",
+	"In Ordnung",
+	"Ham wa aber nicht",
+	"Das jetzt bitte nicht mitschreiben",
+	"Das wage ich zu bezweifeln",
+	"$name:0$, an deinen Platz.",
+	"Kurzer Hinweis",
+	"Kommt zur Ruhe",
+	"$name:0$, Ruhe",
+	"Fatalerweise",
+	"Ich wünsche einen wunderschönen Guten Morgen",
+	"Programm für heute...",
+	"Übungsphase",
+	"...entsprechend...",
+	"Die Spannung steigt$insUnermessliche:0$.",
+	"durchwachsen",
+	"Nach dem großen Erfolg von...",
+	"Wann haben wir?",
+	"Ey, Leute.",
+	"$name:0$, mitschreiben.",
+	"Wir gehen hier davon aus, dass...",
+	"In Hinsicht darauf...",
+	"An eure Plätze",
+	"Dazu werden wir gleich kommen"
 ];
 
 herrmann_inserts = [
@@ -47,6 +81,16 @@ herrmann_inserts = [
 	new randomInsertLookup("nornot", [
 		"n",
 		""
+	]),
+	new randomInsertLookup("insUnermessliche", [
+		" ins Unermessliche",
+		""
+	]),
+	new randomInsertLookup("kleinfeinetc", [
+		"süße",
+		"niedliche",
+		"kleine",
+		"feine"
 	])
 ]
 
@@ -58,6 +102,7 @@ hoffmann_quotes = [
 	"Ich ruf dann mal deine Eltern an, schön auf einen Freitagabend."
 ];
 
+// Laying out bingo options
 quotemap = [
 	new bingoTemplate("Herr Herrmann", herrman_quotes, herrmann_inserts),
 	new bingoTemplate("Standard 0 - 50", range(0, 51), []),
@@ -67,9 +112,14 @@ quotemap = [
 	new bingoTemplate("Standard 0 - 500", range(0, 501), [])
 ];
 
+//#endregion
+
+// Render main screen as soon as the page has loaded
 window.onload = function() {
 	MainScreen();
 };
+
+//#region Bingo Dialogues
 
 function MainScreen() {
 	BodyReset();
@@ -99,7 +149,7 @@ function BingoDialog(quotes, randomInsertLookup) {
 
 	var settingLayer = document.createElement("div");
 	
-	size = 4;
+	size = 5;
 
 	var dialogLabel = document.createElement("label");
 	dialogLabel.className = "dialog-label"
@@ -148,40 +198,101 @@ function BingoDialog(quotes, randomInsertLookup) {
 }
 
 function StartBingo(size, quotes, randomInsertLookup) {
+	// Clear Screen
 	BodyReset();
 
+	// Initiate queue in order to provide equal distribution of randomly picked quotes
 	quoteQueue = [];
 
+	// DOM Element for holding all rows of tiles of the bingo
 	var bingo = document.createElement("div");
 	bingo.className = "centered layered";
 
+	// Iterate y coordinate of the tile to be worked on
 	for (i = 0; i < size; i++) {
+		// Create layer for each "row" of matching y coordinates
 		var layer = document.createElement("div");
+
+		// Iterate over x coordinate (this will be repeated for each layer, thus y coordinate, as this is nested in the y loop, creating a total amount of size^2 tiles)
 		for (j = 0; j < size; j++) {
 
+			//#region DOM Element Creation + Styling
+
+			// Create a tile
 			var tile = document.createElement("button");
 			
+			// CSS Stuff
 			tile.className = "button tile";
 
+			// Fancy dynamic screen size stuff... hope I'll never have to understand this again
+
+			// Calculate the side length of the entire bingo; this is 90% of "vmin"
 			bingoSideLength = 0.9 * ((window.innerWidth > window.innerHeight) ? window.innerHeight : window.innerWidth);
+
+			// Calculate what the size of the tile should be;
+			// this is 
+				// the side length of the bingo
+			// minus
+				// a certain percentage (that will be used as margin around the tiles)
+				// times
+				// the amount of tiles on one axis minus 1 (as the outer tiles do not need margin)
+			//
+			// These values originate from testing; at bingoSideLength == 872.1 a margin of 5px seemed to work.
+			// Because two neighbouring tiles both have margin, the double (10px) is used here.
 			tileSize = (bingoSideLength - ((bingoSideLength * (10 / 872.1)) * (size - 1))) / size;
 			tile.style.width = tileSize + "px";
 			tile.style.height = tileSize + "px";
+
+			// Look at the comments above, should make this easier to understand
 			tile.style.borderRadius = (0.08 * tileSize) + "px";
 			tile.style.margin = (bingoSideLength * (5 / 872.1)) + "px";
 
+			//#endregion
+
+			// If the quote queue is empty, refill it using the originally passed quotes
 			if (quoteQueue.length == 0) {
 				quoteQueue = [...quotes];
 			}
 
+			// Generate a random index for a quote from the queue
 			quote = Math.floor(Math.random() * quoteQueue.length);
 
+			// Initialise a DOM element to hold the tiles text
 			var text = document.createElement("div");
 
+			// Here is where the quote assignment magic happens
+			// First, we assign the actual quote of type string to a new variable
+			// using the random index we generated before
 			quoteRendered = quoteQueue[quote];
+			// We then iterate over every entry in the lookup for random inserts
 			randomInsertLookup.forEach(element => {
-				chosenInsert = element.inserts[Math.floor(Math.random() * element.inserts.length)];
-				quoteRendered = quoteRendered.replaceAll("$" + element.keyword + "$", chosenInsert);
+				// We're bringing back the queueing feature for the inserts!
+				// Also, this is not how I should comment my code in an exam...
+				// Anyways, initially, we fill up the queue with all inserts
+				insertsQueue = [...element.inserts];
+
+				// I really like how clean this for loop looks
+				// We initialise a variable insertInstance as 0
+				// and increase it as long as there is a reference to it contained in the quote.
+				// For each value of insertInstance that we come across we replace all occurrences with an insert that is specific to this instance
+				// This way we can control wether we want random inserts we use to have the same or different values
+				for (
+					insertInstance = 0;
+					quoteRendered.includes("$" + element.keyword + ":" + insertInstance + "$");
+					insertInstance++
+				) {
+					// Generate a random index for an index
+					chosenInsert = Math.floor(Math.random() * insertsQueue.length);
+					// Insert the insert in suitable locations
+					quoteRendered = quoteRendered.replaceAll("$" + element.keyword + ":" + insertInstance + "$", insertsQueue[chosenInsert]);
+					// Remove used insert from the queue
+					insertsQueue.splice(chosenInsert, 1);
+
+					// Replenish queue if it is empty
+					if (insertsQueue.length == 0) {
+						insertsQueue = [...element.inserts];
+					}
+				}
 			});
 
 			text.innerHTML = quoteRendered;
@@ -209,6 +320,10 @@ function StartBingo(size, quotes, randomInsertLookup) {
 	document.body.appendChild(bingo);
 }
 
+//#endregion
+
+//#region Project-specific DOM functions
+
 function githubLink() {
 	var githubLink = document.createElement("a");
 	githubLink.className = "github-link";
@@ -223,3 +338,5 @@ function BodyReset() {
 		child.remove();
 	});
 }
+
+//#endregion
