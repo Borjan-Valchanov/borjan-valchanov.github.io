@@ -19,6 +19,115 @@ function randomInsertLookup(keyword, inserts) {
 	this.inserts = inserts;
 }
 
+// Constructor for theme
+function theme(
+	background,
+	largeButton,
+	largeButtonText,
+	largeButtonShadow,
+	dialogLabel,
+	sizeDisplay,
+	numButton,
+	numButtonText,
+	numButtonShadow,
+	tile,
+	tileClicked,
+	tileText,
+	tileTextClicked,
+	github
+) {
+	this.themeTranslated = new themeTranslation([
+		new selectorDefinition(
+			"body",
+			[
+				new keyValuePair("background-color", background)
+			]
+		),
+		new selectorDefinition(
+			".large-button",
+			[
+				new keyValuePair("background-color", largeButton),
+				new keyValuePair("color", largeButtonText),
+				new keyValuePair("text-shadow", ".5px .5px " + largeButtonShadow)
+			]
+		),
+		new selectorDefinition(
+			".dialog-label",
+			[
+				new keyValuePair("color", dialogLabel)
+			]
+		),
+		new selectorDefinition(
+			".size-display",
+			[
+				new keyValuePair("color", sizeDisplay)
+			]
+		),
+		new selectorDefinition(
+			".num-button",
+			[
+				new keyValuePair("background-color", numButton),
+				new keyValuePair("color", numButtonText),
+				new keyValuePair("text-shadow", ".5px .5px " + numButtonShadow)
+			]
+		),
+		new selectorDefinition(
+			".tile",
+			[
+				new keyValuePair("background-color", tile)
+			]
+		),
+		new selectorDefinition(
+			".tile-clicked",
+			[
+				new keyValuePair("background-color", tileClicked)
+			]
+		),
+		new selectorDefinition(
+			".tile-text",
+			[
+				new keyValuePair("color", tileText)
+			]
+		),
+		new selectorDefinition(
+			".tile-text-clicked",
+			[
+				new keyValuePair("color", tileTextClicked)
+			]
+		),
+		new selectorDefinition(
+			".github-link",
+			[
+				new keyValuePair("color", github)
+			]
+		)
+	]);
+	
+	this.apply = function () {
+		this.themeTranslated.selectorDefinitions.forEach(selectorDefinition => {
+			document.querySelectorAll(selectorDefinition.selector).forEach(element => {
+				selectorDefinition.keyValuePairs.forEach(keyValuePair => {
+					element.style.setProperty(keyValuePair.key, keyValuePair.value);
+				});
+			});
+		});
+	}
+}
+
+function themeTranslation(selectorDefinitions) {
+	this.selectorDefinitions = selectorDefinitions;
+}
+
+function selectorDefinition(selector, keyValuePairs) {
+	this.selector = selector;
+	this.keyValuePairs = keyValuePairs;
+}
+
+function keyValuePair(key, value) {
+	this.key = key;
+	this.value = value;
+}
+
 //#endregion
 
 //#region Bingo Generation Data
@@ -171,6 +280,82 @@ quotemap = [
 
 //#endregion
 
+
+// Themes
+lightTheme = new theme(
+	"#ffffff", // background
+	"#5a8cff", // largeButton
+	"#ffffff", // largeButtonText
+	"#000000", // largeButtonShadow
+	"#000000", // dialogLabel
+	"#000000", // sizeDisplay
+	"#cacbde", // numButton
+	"#000000", // numButtonText
+	"#ffdfdf", // numButtonShadow
+	"#b7bce4", // tile
+	"#24a600", // tileClicked
+	"#000000", // tileText
+	"#ffffff", // tileTextClicked
+	"#3a00d4"  // github
+)
+
+darkTheme = new theme(
+	"#000000", // background
+	"#001d94", // largeButton
+	"#ffffff", // largeButtonText
+	"#000000", // largeButtonShadow
+	"#ffffff", // dialogLabel
+	"#ffffff", // sizeDisplay
+	"#1a1a26", // numButton
+	"#ffffff", // numButtonText
+	"#261a1a", // numButtonShadow
+	"#22272e", // tile
+	"#24a600", // tileClicked
+	"#ffffff", // tileText
+	"#ffffff", // tileTextClicked
+	"#5f24ff"  // github
+)
+
+uglyTheme = new theme(
+	"#ffc2b9", // background
+	"#36e436", // largeButton
+	"#dfca00", // largeButtonText
+	"#ca00df", // largeButtonShadow
+	"#c900c9", // dialogLabel
+	"#ffffff", // sizeDisplay
+	"#00c9c9", // numButton
+	"#ffffff", // numButtonText
+	"#261a1a", // numButtonShadow
+	"#22272e", // tile
+	"#24a600", // tileClicked
+	"#ffacdf", // tileText
+	"#ffffff", // tileTextClicked
+	"#244bff"  // github
+)
+
+secretTheme = new theme(
+	"#000000", // background
+	"#1d9400", // largeButton
+	"#ffffff", // largeButtonText
+	"#000000", // largeButtonShadow
+	"#ffffff", // dialogLabel
+	"#ffffff", // sizeDisplay
+	"#1a261a", // numButton
+	"#ffffff", // numButtonText
+	"#261a1a", // numButtonShadow
+	"#272e22", // tile
+	"#24a600", // tileClicked
+	"#ffffff", // tileText
+	"#ffffff", // tileTextClicked
+	"#5fff24"  // github
+)
+
+setTheme = darkTheme;
+
+function applyTheme(theme) {
+	setTheme = theme;
+}
+
 // Render main screen as soon as the page has loaded
 window.onload = function() {
 	MainScreen();
@@ -196,6 +381,8 @@ function MainScreen() {
 	buttonArea.appendChild(githubLink());
 
 	document.body.appendChild(buttonArea);
+
+	setTheme.apply();
 }
 
 function BingoDialog(quotes, randomInsertLookup) {
@@ -252,6 +439,8 @@ function BingoDialog(quotes, randomInsertLookup) {
 	dialog.appendChild(githubLink());
 
 	document.body.appendChild(dialog);
+
+	setTheme.apply();
 }
 
 function StartBingo(size, quotes, randomInsertLookup) {
@@ -265,6 +454,8 @@ function StartBingo(size, quotes, randomInsertLookup) {
 	var bingo = document.createElement("div");
 	bingo.className = "centered layered";
 
+	bingoBoard = []
+
 	// Iterate y coordinate of the tile to be worked on
 	for (i = 0; i < size; i++) {
 		// Create layer for each "row" of matching y coordinates
@@ -272,6 +463,8 @@ function StartBingo(size, quotes, randomInsertLookup) {
 
 		// Iterate over x coordinate (this will be repeated for each layer, thus y coordinate, as this is nested in the y loop, creating a total amount of size^2 tiles)
 		for (j = 0; j < size; j++) {
+
+			bingoBoard[(i * size) + j] = false;
 
 			//#region DOM Element Creation + Styling
 
@@ -359,10 +552,20 @@ function StartBingo(size, quotes, randomInsertLookup) {
 			text.style.height = tileSize + "px";
 			tile.appendChild(text);
 
+			tile.tileIndex = (i * size) + j;
+
 			tile.onclick = function() {
-				this.className = "button tile tile-clicked";
-				this.childNodes[0].className = "tile-text tile-text-clicked";
+				if (bingoBoard[this.tileIndex] == false) {
+					this.className = "button tile tile-clicked";
+					this.childNodes[0].className = "tile-text tile-text-clicked";
+					bingoBoard[this.tileIndex] = true;
+				} else {
+					this.className = "button tile";
+					this.childNodes[0].className = "tile-text";
+					bingoBoard[this.tileIndex] = false;
+				}
 				this.childNodes[0].style.backgroundColor = "none";
+				setTheme.apply();
 			};
 			
 			quoteQueue.splice(quote, 1);
@@ -375,6 +578,8 @@ function StartBingo(size, quotes, randomInsertLookup) {
 	bingo.appendChild(githubLink());
 
 	document.body.appendChild(bingo);
+	
+	setTheme.apply();
 }
 
 //#endregion
