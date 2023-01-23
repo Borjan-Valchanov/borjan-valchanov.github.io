@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
+    <p id="title" class="centered">Genpool nach Agent Orange - Dauerproblem in Vietnam?</p>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
       <div id="unity-loading-bar">
@@ -77,8 +78,8 @@
       // config.matchWebGLToCanvasSize = false;
 
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        showWebGL = false
-        /*
+        //showWebGL = false
+        
         // Mobile device style: fill the whole browser client area with the game canvas:
 
         var meta = document.createElement('meta');
@@ -93,7 +94,7 @@
         // config.devicePixelRatio = 1;
 
         // unityShowBanner('WebGL builds are not supported on mobile devices.');
-        */
+        
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
