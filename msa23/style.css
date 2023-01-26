@@ -29,6 +29,16 @@
 	font-size: 38px;
 }
 
+#sources-table-div {
+	width: 100vw;
+	overflow-x: auto;
+	/*table-layout: fixed;*/
+}
+
+#sources-table {
+	table-layout: fixed;
+}
+
 #table-head {
 	background-color: #b6b6b6;
 }
@@ -38,5 +48,5 @@ body {
 	margin: 0px;
 	padding: 0px;
 	width: 100vw;
-	height: 100vh;
+	overflow-x: hidden;
 }
