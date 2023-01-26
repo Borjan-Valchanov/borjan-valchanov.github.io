@@ -41,6 +41,12 @@
 
 #table-head {
 	background-color: #b6b6b6;
+	text-align: left;
+}
+
+#table-head-item {
+	padding-left: 5px;
+	padding-right: 10px;
 }
 
 body {
