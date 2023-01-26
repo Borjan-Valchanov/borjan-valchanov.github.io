@@ -41,12 +41,12 @@
 
 #table-head {
 	background-color: #b6b6b6;
-	text-align: left;
 }
 
-#table-head-item {
+th {
 	padding-left: 5px;
 	padding-right: 10px;
+	text-align: left;
 }
 
 body {
