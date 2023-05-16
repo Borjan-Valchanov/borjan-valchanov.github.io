@@ -205,9 +205,9 @@ herrmann_inserts = [
 hoffmann_quotes = [
 	"Deutsche Sprache, schwierige Sprache",
 	"Ihr werdet alle noch mal dumm sterben",
-	"Jetzt strengt mal eure drei Gehirnzellen an",
-	"Ich krieg dann Zuckungen, und dann kann ich auch für nichts mehr garantieren",
-	"Ich ruf dann mal deine Eltern an, schön auf einen Freitagabend."
+	"drei Gehirnzellen ",
+	"Quer durchs Gemüsebeet",
+	"Briefmarken sammeln"
 ];
 
 halley_de = [
