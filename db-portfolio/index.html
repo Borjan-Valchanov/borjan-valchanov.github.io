@@ -1,0 +1,226 @@
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="stylesheet.css"/>
+<script src="script.js"></script>
+<div class="javascript-notice">
+	<div class="title-secondary">Please enable JavaScript to fully experience this document.</div>
+	<div class="javascript-text">It seems you have disabled JavaScript using a browser setting, extension or similar measure.
+	While this will improve privacy on some websites, JavaScript is vital for the functionality
+	of this document. If you are seeing this with JavaScript enabled, it might be that the page is still loading.</div>
+</div>
+<p>
+	<div class="title-primary" id="gliederung">Gliederung</div>
+	<ul>
+		<li><a class="title-tertiary" href="./#gliederung">Gliederung</a></li>
+		<li><a class="title-tertiary" href="./#theorie">Theoretischer Teil</a></li>
+		<ul>
+			<li><a href="./#einfuehrung">Was sind Datenbanken & warum?</a></li>
+			<li><a href="./#relationaledb">Relationale Datenbanken</a></li>
+			<li><a href="./#tabellen">Tabellen</a></li>
+			<li><a href="./#beziehungen">Beziehungen zwischen Tabellen</a></li>
+			<li><a href="./#dbs-modell">Modell Datenbanksysteme</a></li>
+			<li><a href="./#erm">Das ER-Modell</a></li>
+			<ul>
+				<li><a href="./#chen-notation">Chen-Notation</a></li>
+			</ul>
+			<li><a href="./#anomalien">Anomalien in Datenbanken</a></li>
+			<ul>
+				<li><a href="./#aenderungs-anom">Änderungsanomalie</a></li>
+				<li><a href="./#einfuege-anom">Einfügeanomalie</a></li>
+				<li><a href="./#loesch-anom">Löschanomalie</a></li>
+			</ul>
+			<li><a href="./#normalisierung">Normalisierung von Datenbanken</a></li>
+			<ul>
+				<li><a href="./#einfuehrung-nform">Einführung</a></li>
+				<ul>
+					<li><a href="./#db-datenarten">Datenarten</a></li>
+					<li><a href="./#db-anforderungen">Datenbankanforderungen</a></li>
+				</ul>
+				<li><a href="./#1te-nform">1. Normalform</a></li>
+				<li><a href="./#2te-nform">2. Normalform</a></li>
+				<li><a href="./#3te-nform">3. Normalform</a></li>
+			</ul>
+			<li><a href="./#db-sprachen">Datenbanksprachen am Beispiel von SQL</a></li>
+			<ul>
+				<li><a href="./#sql-lesen">Daten lesen: SELECT, FROM</a></li>
+				<li><a href="./#sql-filtern">Daten filtern: WHERE</a></li>
+				<ul>
+					<li><a href="./#sql-reduktion-aggregation">Erweitertes filtern mit Reduktions- und Aggregationsfunktionen:<br/>
+					ORDER BY, GROUP BY, LIMIT, DISTINCT, SUM(), AVG(), MIN(), MAX</a></li>
+				</ul>
+				<li><a href="./#sql-joins">Daten aus mehreren Tabellen: JOINs</a></li>
+				<li><a href="./#sql-insert-into">Daten einfügen: INSERT INTO</a></li>
+				<li><a href="./#sql-update">Daten ändern: UPDATE</a></li>
+				<li><a href="./#sql-delete">Daten löschen: DELETE</a></li>
+				<li><a href="./#sql-create-table">Tabellen erstellen: CREATE TABLE</a></li>
+				<li><a href="./#sql-drop-table">Tabellen löschen: DROP TABLE</a></li>
+			</ul>
+			<li><a href="./#datenschutz-datensicherheit">Datenschutz und Datensicherheit</a></li>
+			<ul>
+				<li><a href="./#datenschutz">Datenschutz: Intern, Extern</a></li>
+				<ul>
+					<li><a href="./#sql-injection">SQL Injection</a></li>
+				</ul>
+				<li><a href="./#datensicherheit">Datensicherheit</a></li>
+				<ul>
+					<li><a href="./#backuptypen">Backuptypen:<br/>
+					Vollständig, Differentiell, Inkrementell</a></li>
+					<li><a href="./#backupstrategien">Backupstrategien: 3-2-1</a></li>
+				</ul>
+			</ul>
+			<li><a href="./#glossar">Glossar</a></li>
+		</ul>
+		<li><a class="title-tertiary" href="./#praxis">Praxisanwendung</a></li>
+	</ul>
+	<hr/>
+	<div class="title-primary" id="theorie">Theoretischer Teil</div>
+	<div class="title-secondary" id="einfuehrung">Was sind Datenbanken & warum?</div>
+	<p>
+		Unter Datenbanken versteht man in der Informatik jegliches System, welches das organisierte Speichern, Abrufen und Verändern von Daten erlaubt. Es gibt viele verschiedene Möglichkeiten, solch ein System zu erstellen. Dies ist auch immer von der Art der zu speichernden Daten abhängig. Dieses Portfolio wird ausschließlich die relationalen Datenbanken thematisieren. Sie sind eine häufige Wahl für viele verschiedene Anwendungsmöglichkeiten.
+	</p>
+	<div class="title-secondary" id="relationaledb">Relationale Datenbanken</div>
+	<p>
+		Relationale Datenbanken bestehen allgemein betrachtet aus verschiedenen Tabellen, in denen Daten abgelegt werden. Diese Tabellen werden <b>Entitäten</b> genannt. Eine Entität speichert Daten über eine ganz bestimmte Art von Sache; so könnte beispielsweise eine Entität mit dem Namen "Schüler" eine Tabelle sein, die die Daten aller Schüler einer Schule, eines Schulbezirks oder einer Stadt sein, je nachdem was genau der Zweck der Datenbank ist.
+	</p>
+	<div class="title-secondary" id="tabellen">Tabellen</div>
+	<p>
+		Dabei ist jede Zeile einer solchen Tabelle eine einzelne "Sache", <b>Objekt</b> genannt. In dem eben genannten Beispiel also würde eine Zeile alle Daten zu genau einem Schüler enthalten.
+	</p>
+	<p>
+		Die Spalten enthalten die immer gleiche Art von Information über jedes Objekt. Sie werden als <b>Attribute</b> ihrer zugehörigen Entität bezeichnet. Ein mögliches Attribut in unserem Beispiel wäre "Vorname". Man würde sagen:<br/>
+		"Vorname" ist ein Attribut der Entität "Schüler".
+	</p>
+	<img src="resources/images/tabellebegriffe.png"/>
+	<p>
+		Bei relationalen Datenbanken ist es wichtig, dass wir die einzelnen Objekte außeinander halten können. Dazu wird ein Attribut oder eine Kombination aus mehreren Attributen zum sogenannten <b>Primärschlüssel</b> der Entität. Jedes Objekt muss einen Wert für diesen Primärschlüssel besitzen, und dieser Wert muss diesem Objekt eindeutig zuordnungsbar sein, also für alle Objekte der Entität einzigartig sein.<br/>
+		In unserem Beispiel könnten wir als Primärschlüssel der Entität "Schüler" die Kombination aus Vorname und Name nehmen, jedoch stellt sich da das Problem, dass es Schüler mit gleichen Namen geben kann. Daher ist es in vielen Tabellen üblich, als Primärschlüssel eine einzigartige Nummer zuzuweisen. Hier könnten wir also als Primärschlüssel ein neues Attribut "SchuelerNr" hinzufügen.
+	</p>
+	<div class="title-secondary" id="beziehungen">Beziehungen zwischen Tabellen</div>
+	<p>
+		Eine Datenbank kann beliebig viele solcher Entitäten enthalten. Häufig jedoch hängen diese Daten zusammen. Wir könnten in unserem Beispiel von eben eine weitere Entität "Schulbücher" hinzufügen, jedoch haben wir damit noch keine Möglichkeit zu speichern, an welche Schüler welche Schulbücher ausgeliehen sind. Solche Zusammenhänge zwischen Tabellen nennt man <b>Beziehungen.</b> In diesem Beispiel könnten wir in die Schulbuchtabelle ein neues Attribut "SchuelerNr" hinzufügen, welches die einzigartige Nummer des Schülers, der das Buch ausgeliehen hat enthält. Solch ein Attribut, welches auf den Primärschlüssel einer <i>anderen</i> Tabelle verweist, wird <b>Fremdschlüssel</b> genannt.
+	</p>
+	<div class="title-secondary" id="dbs-modell">Modell Datenbanksysteme</div>
+	<p>
+		In echten Szenarien gibt es jedoch noch zusätzliche Komponenten neben der eigentlichen Datenbank, um Zugriff auf sie zu regulieren.
+	</p>
+	<img src="resources/images/dbs.png" class="large-image"/>
+	<p>
+		Das <b>Datenbankmanagementsystem (DBMS)</b> verwaltet, wer welche Daten der Datenbank lesen, modifizieren und löschen kann. Außerdem verwaltet es Möglichkeiten, auf die Datenbank zuzugreifen, wie beispielsweise eine <b>API (Application Programming Interface)</b>, also eine Möglichkeit, die Datenbank auf einem Server im Internet abzulegen und dann in einem Computerprogramm Abfragen an die Datenbank über diesen Server zu machen.
+	</p>
+	<p>
+		Der gemeinsame Zusammenschluss aus Datenbank und Datenbankmanagementsystem nennt sich <b>Datenbanksystem</b>, kurz <b>DBS</b>.
+	</p>
+	<div class="title-secondary" id="erm">Das ER-Modell</div>
+	<img src="resources/images/erm.png" class="large-image"/>
+	<p>
+		Mit dem <b>ER-Modell (Entity-Relationship-Modell)</b> können Datenbanken zeichnerisch dargestellt werden. 
+	</p>
+	<p>
+		Tabellen (Entitäten) werden als rechteckige Boxen dargestellt, an denen mit Linien verbunden Attribute als Ellipsen liegen. Primärschlüssel sind dabei unterstrichene Attribute und Fremdschlüssel unterstrichen mit einem Pfeil nach oben am Ende. Beziehungen sind Rauten, die mit beiden relevanten Entitäten verbunden sind.
+	</p>
+	<div class="title-tertiary" id="chen-notation">Chen-Notation</div>
+	<p>
+		Mit der <b>Chen-Notation</b> wird gekennzeichnet, welche Art von Beziehung zwischen zwei Entitäten vorliegt. Um dies zu veranschaulichen: 
+	</p>
+	<ul>
+		<li>Ein Schüler kann mehrere Schulbücher ausleihen, aber ein Schulbuch wird nur von einem Schüler ausgeliehen.<br/>heißt <b>1:n</b>-Beziehung</li>
+		<li>Ein Kunde kann in einem Webshop mehrere Produkte kaufen, und ein Produkt kann von mehreren Kunden gekauft werden.<br/>heißt <b>m:n</b>-Beziehung</li>
+		<li>Die Filiale einer Bäckerkette hat genau eine Adresse, und an einer Adresse steht genau eine Bäckerfiliale.<br/>heißt <b>1:1</b>-Beziehung</li>
+	</ul>
+	<p>Diese Notation kann auch in ER-Modelle eingebunden werden:</p>
+	<img src="resources/images/chen-notation.png" class="wide-image"/>
+	<p>
+		Im Falle einer 1:1-Beziehung können die Eigenschaften der einen Entität in Attribute der anderen Entität umgewandelt werden, da von beiden Seiten aus ein Objekt sich immer nur in genau einer Beziehung befindet: im Bäckerbeispiel wäre die Adresse dann einfach nur ein Attribut der Entität "Bäckerfiliale".<br/>
+		Eine 1:n-Beziehung kann dargestellt werden, indem auf der Seite auf der ein Objekt immer nur in einer Beziehung beteiligt ist ein Fremdschlüssel für die Entität zu der die Beziehung besteht hinzugefügt wird.
+		Bei einer m:n-Beziehung kann diese nicht mehr nur durch Attribute dargestellt werden, da es sich von keiner Seite aus um eine einzigartige Beziehung handelt. Dies ist ein Beispiel für ein Problem, dass beim Erstellen einer Datenbank auftreten kann.
+	</p>
+	<div class="title-secondary" id="anomalien">Anomalien in Datenbanken</div>
+	<p>
+		Anomalien in Datenbanken sind Konstruktionsfehler, die dazu führen, dass Daten versehentlich gelöscht werden, nicht gespeichert werden können oder widersprüchlich werden.<br/>
+		Als Beispiel nehmen wir hier wieder unser Schüler-Schulbuch Szenario, doch diesmal haben wir eine Tabelle für alle Ausleihen, wobei für jede Ausleihe die Daten des Schülers und des Buches gespeichert werden.
+	</p>
+	<div class="title-tertiary" id="aenderungs-anom">Änderungsanomalie</div>
+	<p>
+		Bei einer Änderungsanomalie entstehen durch die Veränderung von Daten widersprüchliche Daten. Bei unserem Beispiel könnte sich beispielsweise die Eltern-Mailaddresse eines Schülers ändern. Da jedoch für jede Schulbuchausleihe die Daten des Schülers einzeln gespeichert werden, könnte es durch einen Fehler passieren, dass manche Ausleihen den alten Wert beibehalten und andere erfolgreich geändert werden.
+	</p>
+	<div class="title-tertiary" id="einfuege-anom">Einfügeanomalie</div>
+	<p>
+		Bei einer Einfügeanomalie können Daten in eine Tabelle nicht eingetragen werden, da Daten für den Eintrag fehlen. Bei unserer Ausleihtabelle beispielsweise müsste der Primärschlüssel die Kombination aus Schülernummer und Schulbuchnummer sein, damit ein Schüler mehrere Bücher ausleihen kann. Kommt jetzt jedoch ein neuer Schüler an die Schule, der noch kein Buch ausgeliehen hat, oder wird ein neues Schulbuch gekauft, aber nicht direkt ausgeliehen, können wir diese nicht einspeichern da im einen Fall eine Buchnummer und im anderen Fall eine Schülernummer fehlt.
+	</p>
+	<div class="title-tertiary" id="loesch-anom">Löschanomalie</div>
+	<p>
+		Bei einer Löschanomalie werden bei einem Versuch bestimmte Daten zu löschen versehentlich auch andere Daten aus einer Datenbank gelöscht, die noch benötigt werden. Dies wäre hier beispielsweise der Fall, wenn ein Schüler sein letztes ausgeliehenes Buch zurückgibt. Beim Löschen der Ausleihe der Datenbank würden dann auch alle Daten zu diesem Schüler verloren gehen, da diese in keiner anderen Ausleihe mehr vorhanden sind.
+	</p>
+	<p>
+		Um diese und andere Probleme zu lösen, werden Datenbanken <b>normalisiert.</b> Dies bedeutet, sie schrittweiser bestimmten Kriterien konform zu machen, damit keine Anomalien auftreten und alle <b>Datenbankanforderungen</b> erfüllt werden.
+	</p>
+	<div class="title-secondary" id="normalisierung">Normalisierung von Datenbanken</div>
+	<div class="title-tertiary" id="einfuehrung-nform">Einführung</div>
+	<div class="title-quaternary" id="db-datenarten">Datenarten</div>
+	<p>
+		Es gibt drei verschiedene Arten von Daten, denen Attribute von Entitäten zugeordnet werden können: <b>Stammdaten, Bewegungsdaten und Prozessdaten.</b>
+	</p>
+	<ul>
+		<p>
+			<b>Stammdaten</b> sind Daten, die entweder komplett fest und unveränderlich sind (z.B. ein Geburtsdatum) oder sich nur sehr selten verändern (z.B. E-Mail-Addresse eines Online-Accounts).
+		</p>
+		<p>
+			<b>Bewegungsdaten</b> sind Daten, die sich <i>regelmäßig</i> und <i>ereignisbasiert</i> verändern. (z.B. die Anzahl von Tischlampen, die ein Online-Shop noch auf Lager hat)
+		</p>
+		<p>
+			<b>Prozessdaten</b> sind Daten, die sich <i>regelmäßig</i> und <i>fortlaufend</i> verändern. Sie stellen das Fortschreiten eines Prozesses dar. (z.B. bis zu welcher Minute du einen Podcast schon gehört hast)
+		</p>
+	</ul>
+	<div class="title-quaternary" id="db-anforderungen">Datenbankanforderungen</div>
+	<p>
+		Während an eine Datenbank und ihr Datenbanksystem in realen Szenarios viele individuelle und spezifischere Anforderungen gestellt werden, können die grundlegenden strukturellen Anforderungen an die Datenbank alleine neben der Anomaliefreiheit auf zwei allgemeine reduziert werden: <b>Datenkonsistenz</b> und <b>Redundanzfreiheit</b>.
+	</p>
+	<ul>
+		<p><b>Datenkonsistenz</b> bedeutet, dass die Datenbank keine widersprüchlichen Daten enthalten darf.</p>
+		<p><b>Redundanzfreiheit</b> bedeutet, dass Daten innerhalb einer Datenbank nicht mehrfach oder unnötig komplex gespeichert werden, also so, dass Speicherplatz optimal genutzt wird.</p>
+	</ul>
+	<p>Mithilfe der sogenannten <b>Normalisierung</b> ist es möglich, fehlerhafte Datenbanken diese Anforderungen erfüllen zu lassen und vollständig anomaliefrei zu sein.</p>
+	<ul>
+		<div class="title-tertiary" id="1te-nform">1. Normalform</div>
+		<p>
+			In der 1. Normalform werden alle Attribute jeder Entität <b>atomar</b> <i>(=altgriech. "unteilbar")</i> gemacht. Das bedeutet, dass alle kombinierten Datensätze in einzelne Attribut aufgeteilt werden. Aus "Addresse" wird dann beispielsweise "Ort", "PLZ", "Straße" und "Hausnummer".
+		</p>
+		<div class="title-tertiary" id="2te-nform">2. Normalform</div>
+		<p>
+			In der 2. Normalform werden Tabellen so aufgespaltet, dass innerhalb jeder Tabelle die gespeicherte Information vollständig von ihrem Primärschlüssel abhängen. Um dies zu veranschaulichen, gehen wir zu unserem Beispiel der kombinierten Tabelle aus Schülern und Schulbüchern zu einer Ausleih-Tabelle zurück: auch wenn ein einzigartiger Datensatz durch die Kombination aus Schülernummer und Buchnummer gekennzeichnet wird (auch wenn dies die mehrfache Ausleihe des selben Buches erlaubt, die wir vorher ausgeschlossen haben), hängt beispielsweise das Geburtsdatum eines Schülers nicht von der Kombination aus Schülernummer und Buchnummer ab, sondern nur von der Schülernummer. Um diese Datenbank in die 2. Normalform zu bringen, würden wir die Tabelle in "Schüler" und "Schulbücher" aufteilen.
+		</p>
+		<div class="title-tertiary" id="3te-nform">3. Normalform</div>
+		<p>
+			In der 3. Normalform werden neue Tabellen erstellt, um Attribute, die für ihren Primärschlüssel nicht spezifisch sind/nicht vom gesamten Primärschlüssel abhängen, zu isolieren. Ein Beispiel wäre, falls wir in der Schulbuchtabelle auch den Buchautor speichern. Auch wenn dieser nur von der Buchnummer abhängig ist, ist er für diese Buchnummer nicht spezifisch (nicht dasselbe wie einzigartig!), da mehrere Bücher vom selben Autor geschrieben werden. Hierbei würde eine neue Tabelle "Autor" entstehen und das Attribut in der Tabelle "Schulbuch" zu einem Fremdschlüssel werden.
+		</p>
+	</ul>
+	<div class="title-secondary" id="db-sprachen">Datenbanksprachen am Beispiel von SQL</div>
+	<p>
+		Datenbanksprachen werden verwendet, um aus einer Datenbank Informationen auszulesen, zu löschen und zu modifizieren. Es gibt sehr viele, sowohl für relationale als auch für andere Datenbanken. Die meisten Datenbanksprachen für relationale Datenbanken sind Dialekte von <b>SQL (Structured Query Language)</b>, wie beispielsweise CQL, MySQL, PostgreSQL, sqlite und viele mehr.<br/>
+		Als Beispiel wird hier SQL verwendet.
+	</p>
+	<p>
+		Ein SQL-Ausdruck endet immer mit einem Semikolon (<code>;</code>).
+	</p>
+	<div class="title-tertiary" id="sql-lesen">Daten lesen</div>
+	<p>
+		Mithilfe von <code><red>SELECT</red></code> und <code><red>FROM</red></code> werden Daten aus Tabellen abgefragt. Die Syntax funktioniert wie folgt:
+	</p>
+	<p class="large-margin">
+		<code><red>SELECT</red> Attribute <red>FROM</red> <blue>Tabelle</blue>;</code>
+	</p>
+	<p>
+		Damit werden die Attribute <code>Attribute</code> aller Einträge aus <code><blue>Tabelle</blue></code> ausgegeben. Alternativ kann auch ein Asterisk <code>*</code> verwendet werden, wenn alle Attribute erwünscht sind:
+	</p>
+	<p class="large-margin">
+		<code><red>SELECT</red> * <red>FROM</red> <blue>Tabelle</blue>;</code>
+	</p>
+	<div class="title-tertiary" id="sql-filtern">Daten filtern</div>
+	<p>Manchmal jedoch möchte man die Daten, die man erhält, weiter filtern. In diesem Fall wird <code><red>WHERE</red></code> verwendet. Damit können Beschränkungen auf Attributswerte gelegt werden. Diese Anfrage beispielsweise gibt alle Daten über Schüler aus Berlin aus einer gedachten Beispieltabelle aus:</p>
+	<p class="large-margin">
+		<code><red>SELECT</red> * <red>FROM</red> <blue>Schueler</blue> <red>WHERE</red> Ort = <yellow>'Berlin'</yellow>;</code>
+	</p>
+	<p>
+		Wir können zusätzlich Daten filtern und verarbeiten mit sogenannten <b>Reduktions- und Aggregationsfunktionen.</b>
+	</p>
+	<div class="title-quaternary" id="sql-reduktion-aggregation">Reduktions- und Aggregationsfunktionen</div>
+</p>

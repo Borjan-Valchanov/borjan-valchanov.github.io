@@ -1,0 +1,120 @@
+@font-face {
+	font-family: 'CascadiaCode';
+	src:
+		url('resources/fonts/CascadiaCode.woff2') format('woff2'),
+		url('resources/fonts/CascadiaCode.ttf') format('truetype');
+}
+
+body {
+	color: black;
+	background-color: #eaf5ff;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	max-width: 1440px;
+	margin: auto;
+}
+
+code {
+	background-color: #282c34;
+	color:#abb2bf;
+	padding: 4px;
+	border-radius: 4px;
+	font-family: 'CascadiaCode';
+	font-size: small;
+}
+
+img {
+	height: 20vh;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
+p {
+	margin-left: 1.5vw;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+red {
+	color: #DA6C75;
+}
+
+green {
+	color: #98C379;
+}
+
+blue {
+	color: #43B5C2;
+}
+
+yellow {
+	color: #E5C07B;
+}
+
+purple {
+	color: #C678DD;
+}
+
+.javascript-notice {
+	background-color: #ffa49b;
+	top: 5px;
+	left: 5px;
+	padding: 10px;
+	margin: 5px;
+	border-radius: 10px;
+}
+.javascript-text {
+	margin-top: 5px;
+}
+
+.large-image {
+	height: 40vh;
+}
+
+.wide-image {
+	width: 45vw;
+	height: auto;
+}
+
+.large-margin {
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+
+.title-primary {
+	font-size:xx-large;
+	font-weight: 600;
+	text-shadow: .5px .5px #212128;
+	margin-bottom: 5px;
+	text-decoration-line: underline;
+	text-decoration-thickness: 1px;
+	text-decoration-color: #d2d2d2;
+}
+
+.title-secondary {
+	font-size: x-large;
+	font-weight: 600;
+	text-shadow: .5px .5px #212128;
+	margin-bottom: 5px;
+}
+
+.title-tertiary {
+	font-size: large;
+	font-weight: 500;
+	text-shadow: .5px .5px #212128;
+	margin-bottom: 5px;
+	text-decoration-line: underline;
+	text-decoration-thickness: 1px;
+	text-decoration-color: #d2d2d2;
+}
+
+.title-quaternary {
+	font-weight: 500;
+	text-shadow: .5px .5px #212128;
+	margin-bottom: 5px;
+	text-decoration-line: underline;
+	text-decoration-thickness: 1px;
+	text-decoration-color: #d2d2d2;
+}
