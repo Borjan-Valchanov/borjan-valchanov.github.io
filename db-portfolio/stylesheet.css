@@ -26,10 +26,15 @@ code {
 	border-radius: 4px;
 	font-family: 'CascadiaCode';
 	font-size: small;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	display:inline-block;
 }
 
 img {
 	height: 20vh;
+	border-radius: 5px;
+	margin-bottom: 16px;
 }
 
 a {
@@ -39,8 +44,8 @@ a {
 
 p {
 	margin-left: 1.5vw;
-	margin-top: 8px;
-	margin-bottom: 8px;
+	margin-top: 4px;
+	margin-bottom: 4px;
 }
 
 red {
@@ -82,11 +87,6 @@ purple {
 .wide-image {
 	width: 45vw;
 	height: auto;
-}
-
-.large-margin {
-	margin-top: 16px;
-	margin-bottom: 16px;
 }
 
 .title-primary {

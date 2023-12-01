@@ -131,7 +131,7 @@
 	<p>
 		Im Falle einer 1:1-Beziehung können die Eigenschaften der einen Entität in Attribute der anderen Entität umgewandelt werden, da von beiden Seiten aus ein Objekt sich immer nur in genau einer Beziehung befindet: im Bäckerbeispiel wäre die Adresse dann einfach nur ein Attribut der Entität "Bäckerfiliale".<br/>
 		Eine 1:n-Beziehung kann dargestellt werden, indem auf der Seite auf der ein Objekt immer nur in einer Beziehung beteiligt ist ein Fremdschlüssel für die Entität zu der die Beziehung besteht hinzugefügt wird.
-		Bei einer m:n-Beziehung kann diese nicht mehr nur durch Attribute dargestellt werden, da es sich von keiner Seite aus um eine einzigartige Beziehung handelt. Dies ist ein Beispiel für ein Problem, dass beim Erstellen einer Datenbank auftreten kann.
+		Bei einer m:n-Beziehung kann diese nicht mehr nur durch Attribute dargestellt werden, da es sich von keiner Seite aus um eine einzigartige Beziehung handelt. Hier wird eine neue Tabelle mit nur zwei Spalten erstellt, die jeweils Fremdschlüssel für die beiden beteiligten Tabellen sind. Ihre Kombination ist der Primärschlüssel der Tabelle.
 	</p>
 	<div class="title-secondary" id="anomalien">Anomalien in Datenbanken</div>
 	<p>
@@ -205,22 +205,55 @@
 	<p>
 		Mithilfe von <code><red>SELECT</red></code> und <code><red>FROM</red></code> werden Daten aus Tabellen abgefragt. Die Syntax funktioniert wie folgt:
 	</p>
-	<p class="large-margin">
-		<code><red>SELECT</red> Attribute <red>FROM</red> <blue>Tabelle</blue>;</code>
-	</p>
+	<code><red>SELECT</red> Attribute <red>FROM</red> <blue>Tabelle</blue>;</code>
 	<p>
 		Damit werden die Attribute <code>Attribute</code> aller Einträge aus <code><blue>Tabelle</blue></code> ausgegeben. Alternativ kann auch ein Asterisk <code>*</code> verwendet werden, wenn alle Attribute erwünscht sind:
 	</p>
-	<p class="large-margin">
-		<code><red>SELECT</red> * <red>FROM</red> <blue>Tabelle</blue>;</code>
-	</p>
+	<code><red>SELECT</red> * <red>FROM</red> <blue>Tabelle</blue>;</code>
 	<div class="title-tertiary" id="sql-filtern">Daten filtern</div>
 	<p>Manchmal jedoch möchte man die Daten, die man erhält, weiter filtern. In diesem Fall wird <code><red>WHERE</red></code> verwendet. Damit können Beschränkungen auf Attributswerte gelegt werden. Diese Anfrage beispielsweise gibt alle Daten über Schüler aus Berlin aus einer gedachten Beispieltabelle aus:</p>
-	<p class="large-margin">
-		<code><red>SELECT</red> * <red>FROM</red> <blue>Schueler</blue> <red>WHERE</red> Ort = <yellow>'Berlin'</yellow>;</code>
-	</p>
+	<code><red>SELECT</red> * <red>FROM</red> <blue>Schueler</blue> <red>WHERE</red> Ort = <yellow>'Berlin'</yellow>;</code>
 	<p>
 		Wir können zusätzlich Daten filtern und verarbeiten mit sogenannten <b>Reduktions- und Aggregationsfunktionen.</b>
 	</p>
 	<div class="title-quaternary" id="sql-reduktion-aggregation">Reduktions- und Aggregationsfunktionen</div>
+	<p>
+		Reduktions- und Aggregationsfunktionen inkludieren viele kleine, hilfreiche Dinge mit denen gemeinsam hohe Abfragekomplexität erreicht werden kann.
+	</p>
+	<p>Die folgenden Funktionen folgen dem Format <code><green>funktion</green>(Attribut)</code> und können mit <code><red>SELECT</red></code>, <code><red>WHERE</red></code> und <code><purple>ORDER BY</purple></code> verwendet werden.</p>
+	<ul>
+		<p><code><green>MIN</green>(Attribut)</code>: Nennt den kleinsten Wert, der für dieses Attribut vorkommt</p>
+		<p><code><green>MAX</green>(Attribut)</code>: Nennt den größten Wert, der für dieses Attribut vorkommt</p>
+		<p><code><green>AVG</green>(Attribut)</code>: Nennt den Durchschnitt aller Werte für dieses Attribut</p>
+		<p><code><green>SUM</green>(Attribut)</code>: Nennt die Summe aller Werte für dieses Attribut</p>
+		<p><code><green>COUNT</green>(Attribut)</code>: Nennt die Anzahl von Werten für dieses Attribut. Zählt gleiche Werte mehrfach.</p>
+	</ul>
+	<p>Weitere Funktionen:</p>
+	<ul>
+		<p><code><purple>GROUP BY</purple> Attribut</code>: Wird an die bestehende Abfrage angehangen und gruppiert die Ergebnisse nach dem Wert von <code>Attribut</code>.</p>
+		<ul>
+			<p>
+				Beispiel: <code><red>SELECT</red> Ort, <green>COUNT</green>(Kundennr) <red>FROM</red> <blue>Kunden</blue> <purple>GROUP BY</purple> Ort;</code> gibt die Anzahl von Kunden pro Ort aus der gedachten Tabelle "Kunden" aus.
+			</p>
+		</ul>
+		<p><code><purple>ORDER BY</purple> Attribut</code>: Sortiert nach <code>Attribut</code>. Durch Anhängen von <code><purple>ASC</purple></code> bzw. <code><purple>DESC</purple></code> wird entweder aufsteigend oder absteigend sortiert. Standardmäßig ist die Sortierung aufsteigend.</p>
+		<p><code><purple>LIMIT</purple> #</code>: Begrenzt die Anzahl der auszugebenden Zeilen auf die ganze, positive Zahl <code>#</code>.</p>
+		<p><code><green>DISTINCT</green> Attribut</code>: Ignoriert weitere, gleiche Werte für <code>Attribut</code> falls diese mehrfach vorkommen.<br></p>
+		<ul>
+			<p>
+				Beispiel: <code><red>SELECT</red> <green>COUNT</green>(Ort) <red>FROM</red> <blue>Kunden</blue>;</code> gibt die Anzahl von Kunden an, die einen Wohnort angegeben haben.<br>
+				<code><red>SELECT</red> <green>COUNT</green>(<green>DISTINCT</green> Ort) <red>FROM</red> <blue>Kunden</blue>;</code> gibt die Anzahl von Orten an, in denen Kunden wohnen.
+			</p>
+		</ul>
+	</ul>
+	<div class="title-tertiary" id="sql-joins">Daten aus mehreren Tabellen</div>
+	<p>
+		Wir haben zuvor die Normalisierung kennengelernt, bei der wir Tabellen aufgespalten haben, um einige entstehende Probleme zu vermeiden. Dies hat jedoch auch dafür gesorgt, dass wir mit unserem bisherigen Wissen zu Datenbankabfragen keine kombinierten Daten abfragen können. Um dies zu tun, gibt es in SQL sogenannte <b>JOINs</b>. Damit verbinden <i>(=engl. "join")</i> wir Tabellen über die vorhandenen Fremdschlüssel.
+	</p>
+	<p>
+		Wir werden hierbei uns an das Schüler-Schulbuch Beispiel halten. Wenn wir eine kombinierte Tabelle als Ausgabe haben möchten, müssen wir darauf achten, dass die Daten innerhalb jeder Zeile zusammengehören. Dies ist der Fall, wenn der Fremdschlüssel für den Schüler in der Tabelle Schulbuch in dieser Zeile den gleichen Wert hat wie der Primärschlüssel des Schülers in dieser Zeile. In SQL können wir dies wie folgt ausdrücken:
+	</p>
+	<code><red>SELECT</red> * <red>FROM</red> <blue>Schueler</blue>, <blue>Schulbuch</blue><br><red>WHERE</red> <blue>Schueler</blue>.Schuelernr = <blue>Schulbuch</blue>.AusgeliehenVon;</code>
+	<div class="title-tertiary" id="sql-insert-into">Daten einfügen</div>
+	
 </p>
