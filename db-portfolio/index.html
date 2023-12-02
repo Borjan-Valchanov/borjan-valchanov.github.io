@@ -318,7 +318,7 @@
 		<p><code><purple>TEXT</purple></code>: Text</p>
 		<p><code><purple>DECIMAL</purple></code>: eine Fließkommazahl</p>
 		<p><code><purple>DATE</purple></code>: ein Datum</p>
-		<p><code><purple>BOOL</purple></code>: ein Wahr-Falsch-Wert, auch bool'scher Wert</p>
+		<p><code><purple>BOOLEAN</purple></code>: ein Wahr-Falsch-Wert, auch bool'scher Wert</p>
 	</ul>
 	<p>
 		<b>Constraints</b> geben Rahmenbedingungen für das Attribut an. Hier sind sie aufgelistet:
@@ -348,6 +348,32 @@
 	</p>
 	<div class="title-tertiary" id="datenschutz">Datenschutz</div>
 	<p>
-		
+		Datenschutz unterscheidet sich intern und extern: Intern muss hauptsächlich Zugriff beschränkt werden. Nach außen hin muss direkter Datenbankzugriff vermieden werden, während trotzdem Zugriff auf manche Daten erlaubt werden muss. Wir werden dafür das Beispiel <b>SQL-Injection</b> betrachten.
 	</p>
+	<div class="title-quaternary" id="sql-injection">SQL-Injection</div>
+	<p>
+		SQL-Injection ist das "unterschmuggeln" von SQL-Ausdrücken in datenbankbasierte Abfragefelder. Nehmen wir an, wir haben ein Suchfeld auf der Webseite einer Bibliothek. Wird ein Suchbegriff eingegeben, wird die folgende Datenbankanfrage gesendet:
+	</p>
+	<code><red>SELECT</red> Titel, Autor, ISBN <red>FROM</red> <blue>Tabelle</blue> <red>WHERE</red> Titel=<yellow>'%[Suchbegriff]%';</yellow></code>
+	<p>
+		Wobei <code>[Suchbegriff]</code> mit dem tatsächlichen Suchbegriff ersetzt wird und <code>%</code> für jede mögliche Buchstabenfolge stehen kann. Jetzt gibt ein Nutzer folgenden Suchbegriff ein:
+	</p>
+	<p>
+		'); SELECT * FROM Kunden; --
+	</p>
+	<p>Die entstehende Anfrage lautet:</p>
+	<code><red>SELECT</red> Titel, Autor, ISBN <red>FROM</red> <blue>Tabelle</blue> <red>WHERE</red> Titel=<yellow>'%'</yellow>); <red>SELECT</red> * <red>FROM</red> <blue>Kunden</blue>; --%';</code>
+	<p>
+		Als Ergebnis erhält der Nutzer jetzt also eine Liste aller Bücher, aber auch aller Kundendaten <i>(Notiz: <code>--</code> beginnt in SQL einen Kommentar, weswegen alles danach von der Datenbank ignoriert wird)</i> Dies ist natürlich unerwünscht. Es gibt viele Wege, dies zu verhindern. Meist werden Sonderzeichen einfach kodiert, d. h. alle Sonderzeichen werden sowohl bei eingegebenen Suchanfragen als auch in der Datenbank selber durch z.B. <code>\</code> und einen für dieses Sonderzeichen spezifischen Zahlencode ersetzt.
+	</p>
+	<div class="title-tertiary" id="datensicherheit">Datensicherheit</div>
+	<div class="title-quaternary" id="backuptypen">Backuptypen</div>
+	<p>
+		Es gibt drei unterschiedliche Arten von Backups:
+	</p>
+	<ul>
+		<li><b>Vollständige Backups</b>: </li>
+		<li><b>Differentielle Backups</b>: </li>
+		<li><b>Inkrementelle Backups</b>: </li>
+	</ul>
 </p>
