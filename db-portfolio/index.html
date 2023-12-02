@@ -254,6 +254,100 @@
 		Wir werden hierbei uns an das Schüler-Schulbuch Beispiel halten. Wenn wir eine kombinierte Tabelle als Ausgabe haben möchten, müssen wir darauf achten, dass die Daten innerhalb jeder Zeile zusammengehören. Dies ist der Fall, wenn der Fremdschlüssel für den Schüler in der Tabelle Schulbuch in dieser Zeile den gleichen Wert hat wie der Primärschlüssel des Schülers in dieser Zeile. In SQL können wir dies wie folgt ausdrücken:
 	</p>
 	<code><red>SELECT</red> * <red>FROM</red> <blue>Schueler</blue>, <blue>Schulbuch</blue><br><red>WHERE</red> <blue>Schueler</blue>.Schuelernr = <blue>Schulbuch</blue>.AusgeliehenVon;</code>
+	<p>
+		Was wir hier gemacht haben, nennt sich ein <b>Inner Join</b>, da aus beiden Tabellen nur Daten vorkommen, die eine Beziehung zu einem Datensatz der anderen Tabelle haben. Daneben gibt es auch noch den <b>Left Join</b>, bei dem alle kombinierten Daten plus die beziehungslosen Daten <i>einer</i> Tabelle vorkommen. Beim <b>Outer Join</b> werden alle Daten, die kombiniert werden können, kombiniert, aber es kommen auch beziehungslose Daten aus <i>beiden</i> Tabellen vor. 
+	</p>
+	<img src="resources/images/joins.png"/>
+	<p>
+		Für JOINs gibt es einfachere Syntax, bei der auch ganz einfach zwischen den verschiedenen Arten von JOINs variiert werden kann. Diese kommt vor dem <code><red>WHERE</red></code> und nach dem <code><red>FROM</red></code> und sieht wie folgt aus:
+	</p>
+	<code><red>SELECT</red> Attribute <red>FROM</red> <blue>Tabelle1</blue> [<red>INNER</red>/<red>LEFT</red>/<red>OUTER</red>] <red>JOIN</red> <blue>Tabelle2</blue> <red>ON</red> <blue>Tabelle1</blue>.Primärschlüssel = <blue>Tabelle2</blue>.Fremdschlüssel;</code>
+	<p>
+		Dabei wird je nach Bedarf aus der Klammer <code>[]</code> der <code><red>INNER JOIN</red></code>, <code><red>LEFT JOIN</red></code> oder <code><red>OUTER JOIN</red></code> gewählt. Es gibt außerdem eine weitere Variation des Inner Join, den sogenannten <b>Natural Join</b>. Dieser hat einfach nur eine verkürzte Schreibweise, da <code><red>ON</red> [Verbindungsbedingung]</code> wegfällt. Er wird verwendet, wenn der Name des Fremdschlüsselattributs in der zu verbindenden Tabelle der gleiche ist wie der des Primärschlüssels der ersten Tabelle. 
+	</p>
 	<div class="title-tertiary" id="sql-insert-into">Daten einfügen</div>
-	
+	<p>
+		Neben dem Lesen von Datenbanken ist natürlich das Einfügen neuer Daten eine wichtige Aufgabe bei echten Datenbankanwendungen. Hierfür wird folgende Syntax verwendet:
+	</p>
+	<code><red>INSERT INTO</red> <blue>Tabelle</blue> (Attribut1, Attribut2, ...) <red>VALUES</red> (Wert1, Wert2, ...);</code>
+	<p>
+		Dabei wird ein neuer Tabelleneintrag erstellt, mit Werten für alle angegebenen Attribute. Dabei müssen für den Primärschlüssel und alle Attribute, die den <code><red>NOT NULL</red></code>-Constraint haben. Mehr Details dazu bei: <i>"<a href="./#sql-create-table">Tabellen erstellen: CREATE TABLE</a>"</i>
+	</p>
+	<div class="title-tertiary" id="sql-update">Daten modifizieren</div>
+	<p>
+		Daten existierender Tabelleneinträge werden über folgende Syntax modifiziert:
+	</p>
+	<code><red>UPDATE</red> <blue>Tabelle</blue> <red>SET</red> Attribut1 = Wert1, Attribut2 = Wert2, ... <red>WHERE</red> [Bedingung];</code>
+	<p>
+		Hier werden die Attributswerte <i>aller</i> Tabelleneinträge modifiziert, die <code>[Bedingung]</code> erfüllen. Wenn man nur einen einzelnen Datensatz modifizieren will, enthält die Bedingung einen eindeutigen Wert für den Primärschlüssel.
+	</p>
+	<div class="title-tertiary" id="sql-delete">Daten löschen</div>
+	<code><red>DELETE</red> Attribut1, Attribut2, ... <red>FROM</red> <blue>Tabelle</blue> <red>WHERE</red> [Bedingung];</code>
+	<p>
+		Mit <code><red>DELETE</red></code> können einzelne Attributswerte aus einem Datensatz gelöscht werden. Beim Löschen des Primärschlüssels wird der gesamte Datensatz gelöscht. Auch hier wird dies auf allle der auf <code>[Bedingung]</code> zutreffenden Datensätze angewandt. Daher ist große Vorsicht geboten.
+	</p>
+	<div class="title-tertiary" id="sql-create-table">Tabellen erstellen</div>
+	<code>
+		<red>CREATE TABLE</red> <blue>Tabelle</blue> (<br>
+		Attribut1 [<purple>Datentyp</purple>] [<purple>Constraints</purple>],<br>...
+		<br>)
+	</code>
+	<p>
+		Primärschlüssel werden wie folgt denotiert:
+	</p>
+	<code>
+		<red>CREATE TABLE</red> <blue>Tabelle</blue> (<br>
+		Attribut1 [<purple>Datentyp</purple>] [<purple>Constraints</purple>] <red>PRIMARY KEY</red>,<br>...
+		<br>)
+	</code>
+	<p>
+		oder
+	</p>
+	<code>
+		<red>CREATE TABLE</red> <blue>Tabelle</blue> (<br>
+		Attribut1 [<purple>Datentyp</purple>] [<purple>Constraints</purple>],<br>
+		...,<br>
+		<red>PRIMARY KEY</red>(Attribut1, Attribut2, ...)
+		<br>)
+	</code>
+	<p>
+		<b>Datentypen</b> beschreiben, welche Arten von Werten für ein Attribut gespeichert werden können. Hier sind einige aufgelistet:
+	</p>
+	<ul>
+		<p><code><purple>INT</purple></code>: eine ganze Zahl</p>
+		<p><code><purple>TEXT</purple></code>: Text</p>
+		<p><code><purple>DECIMAL</purple></code>: eine Fließkommazahl</p>
+		<p><code><purple>DATE</purple></code>: ein Datum</p>
+		<p><code><purple>BOOL</purple></code>: ein Wahr-Falsch-Wert, auch bool'scher Wert</p>
+	</ul>
+	<p>
+		<b>Constraints</b> geben Rahmenbedingungen für das Attribut an. Hier sind sie aufgelistet:
+	</p>
+	<ul>
+		<p><code><purple>NOT NULL</purple></code>: Es <i>muss</i> immer ein Wert für dieses Attribut angegeben werden.</p>
+		<p><code><purple>AUTO INCREMENT</purple></code>: Zählt beim Erstellen neuer Datensätze den Wert bei Zahlattributen hoch. Hiermit kann vermieden werden, dass für Primärschlüssel oder <code><purple>NOT NULL</purple></code>-Attribute ein Wert angegeben werden muss.</p>
+		<p><code><purple>UNIQUE</purple></code>: Der Wert muss einzigartig sein.</p>
+	</ul>
+	<div class="title-tertiary" id="sql-drop-table">Tabellen löschen</div>
+	<p>
+		Zu guter letzt müssen manchmal auch Tabellen gelöscht werden. Dies geschieht mit:
+	</p>
+	<code><red>DROP TABLE</red> <blue>Tabelle</blue>;</code>
+	<p>
+		Die Daten in der Tabelle sind dann sofort und unwiderruflich <i>weg.</i> Damit so etwas nicht versehentlich passiert, gibt es bestimmte Sicherheitsmaßnahmen in Datenbankmanagementsystemen.
+	</p>
+	<div class="title-secondary" id="datenschutz-datensicherheit">Datenschutz und Datensicherheit</div>
+	<p>
+		Bevor wir das Erreichen dieser beiden Zielsetzungen klären können, müssen wir uns erst des Unterschiedes bewusst werden.
+	</p>
+	<p>
+		<b>Datenschutz</b> bedeutet das <i>Schützen</i> unserer Daten <i>vor unerlaubtem Zugriff.</i> Dafür muss Zugriff auf Daten verwaltet werden, wie beispielsweise, was für Nutzer/Mitarbeiter was für Zugriff <i>(Lese-/Schreib-/Löschzugriff "rwx")</i> auf welche Tabellen haben.
+	</p>
+	<p>
+		<b>Datensicherheit</b> bedeutet die <i>Sicherung des unbeschädigten Fortbestehens</i> unserer Daten. Dafür müssen vor allem Backuplösungen betrachtet werden.
+	</p>
+	<div class="title-tertiary" id="datenschutz">Datenschutz</div>
+	<p>
+		
+	</p>
 </p>

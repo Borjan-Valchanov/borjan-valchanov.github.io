@@ -5,6 +5,10 @@
 		url('resources/fonts/CascadiaCode.ttf') format('truetype');
 }
 
+html {
+	background-color: #c2d5ef;
+}
+
 body {
 	color: black;
 	background-color: #eaf5ff;
@@ -17,6 +21,9 @@ body {
 	padding-bottom: 10px;
 	padding-left: 40px;
 	padding-right: 40px;
+	border: 1.5px #1a253f solid;
+	border-top: none;
+	border-bottom: none;
 }
 
 code {
