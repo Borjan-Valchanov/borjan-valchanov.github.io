@@ -70,6 +70,10 @@
 			<li><a href="./#glossar">Glossar</a></li>
 		</ul>
 		<li><a class="title-tertiary" href="./#praxis">Praxisanwendung</a></li>
+		<ul>
+			<li><a href="./#praxis-erm">ER-Modell</a></li>
+			<li><a href="./#praxis-sql">Beispielabfrage</a></li>
+		</ul>
 	</ul>
 	<hr/>
 	<div class="title-primary" id="theorie">Theoretischer Teil</div>
@@ -372,8 +376,133 @@
 		Es gibt drei unterschiedliche Arten von Backups:
 	</p>
 	<ul>
-		<li><b>Vollständige Backups</b>: </li>
-		<li><b>Differentielle Backups</b>: </li>
-		<li><b>Inkrementelle Backups</b>: </li>
+		<li><b>Vollständige Backups</b>: Umfassen alle Daten, größter Speicherbedarf</li>
+		<li><b>Differentielle Backups</b>: Umfasst alle Daten, die seit dem letzten vollständigen Backup verändert wurden. Speichert auch gelöschte Daten. Mittlerer Speicherbedarf.</li>
+		<li><b>Inkrementelle Backups</b>: Umfasst alle Änderungen seit dem letzten vollständigen oder differentiellen Backup. Speichert kein gelöschten Daten. Geringster Speicherbedarf.</li>
 	</ul>
+	<p>
+		Aufgrund dieser Staffelung von Speicherbedarf enthalten die meisten Backuplösungen auch gestaffelt große Zeitintervalle für die einzelnen Backuptypen, z.B.:
+	</p>
+	<ul>
+		<li>vollständig alle 6 Monate</li>
+		<li>differentiell jeden Monat</li>
+		<li>inkrementell jede Woche</li>
+	</ul>
+	<div class="title-quaternary" id="backupstrategien">Backupstrategien</div>
+	<p>Da auch Backupmedien mal beschädigt, durch ein Feuer vernichtet o.Ä. werden können, gibt es Strategien, mehrere Backups zu verteilen. Während es mittlerweile modernere und sicherere Strategien gibt, bleibt die <b>3-2-1</b>-Strategie die meistverwendetste. 3-2-1 <i>(gesprochen: three-two-one)</i> steht dabei für:</p>
+	<ul>
+		<li><b>3</b> separate Kopien des selben Backups</li>
+		<li><b>2</b> verschiedene Medien (z.B. SSD, HDD, CD-ROM, USB-Stick)</li>
+		<li><b>1</b> der Backups an einem anderen Ort (z.B. falls Feuer)</li>
+	</ul>
+	<div class="title-secondary" id="glossar">Glossar</div>
+	<ul>
+		<li><b>3-2-1-Strategie</b>: <p> Backupstrategie, 3-2-1 <i>(gesprochen: three-two-one)</i> steht für:</p>
+			<ul>
+				<li><b>3</b> separate Kopien des selben Backups</li>
+				<li><b>2</b> verschiedene Medien (z.B. SSD, HDD, CD-ROM, USB-Stick)</li>
+				<li><b>1</b> der Backups an einem anderen Ort (z.B. falls Feuer)</li>
+			</ul>
+		</li>
+		<li><b>Anomalie</b>: <p>Anomalien in Datenbanken sind Konstruktionsfehler, die dazu führen, dass Daten versehentlich gelöscht werden, nicht gespeichert werden können oder widersprüchlich werden.<br/>
+			Als Beispiel nehmen wir hier wieder unser Schüler-Schulbuch Szenario, doch diesmal haben wir eine Tabelle für alle Ausleihen, wobei für jede Ausleihe die Daten des Schülers und des Buches gespeichert werden.</p>
+		</li>
+		<li><b>API (Application Programming Interface)</b>: <p>Schnittstelle zur Interaktion mit einem anderen System, verwendet für die Programmierung von Anwendungen. Kann für ein lokales Gerät, Software oder Internetserver sein (Web-API).</p>
+		</li>
+		<li><b>Attribut/Zeile</b>: <p>
+			Attribute sind die Spalten von Tabellen (Entitäten) relationaler Datenbanken.
+		</p></li>
+		<li><b>Backuptypen</b>: <p>
+			Es gibt drei unterschiedliche Arten von Backups:
+		</p>
+		<ul>
+			<li><b>Vollständige Backups</b>: Umfassen alle Daten, größter Speicherbedarf</li>
+			<li><b>Differentielle Backups</b>: Umfasst alle Daten, die seit dem letzten vollständigen Backup verändert wurden. Speichert auch gelöschte Daten. Mittlerer Speicherbedarf.</li>
+			<li><b>Inkrementelle Backups</b>: Umfasst alle Änderungen seit dem letzten vollständigen oder differentiellen Backup. Speichert kein gelöschten Daten. Geringster Speicherbedarf.</li>
+		</ul>
+		<p>
+			Aufgrund dieser Staffelung von Speicherbedarf enthalten die meisten Backuplösungen auch gestaffelt große Zeitintervalle für die einzelnen Backuptypen, z.B.:
+		</p>
+		<ul>
+			<li>vollständig alle 6 Monate</li>
+			<li>differentiell jeden Monat</li>
+			<li>inkrementell jede Woche</li>
+		</ul></li>
+		<li><b>Beziehung</b>: <p>
+			Zusammenhänge zwischen den Entitäten einer relationalen Datenbank
+		</p></li>
+		<li><b>Chen-Notation</b>: <p>
+			Mit der <b>Chen-Notation</b> wird gekennzeichnet, welche Art von Beziehung zwischen zwei Entitäten vorliegt. Um dies zu veranschaulichen: 
+		</p>
+		<ul>
+			<li>Ein Schüler kann mehrere Schulbücher ausleihen, aber ein Schulbuch wird nur von einem Schüler ausgeliehen.<br/>heißt <b>1:n</b>-Beziehung</li>
+			<li>Ein Kunde kann in einem Webshop mehrere Produkte kaufen, und ein Produkt kann von mehreren Kunden gekauft werden.<br/>heißt <b>m:n</b>-Beziehung</li>
+			<li>Die Filiale einer Bäckerkette hat genau eine Adresse, und an einer Adresse steht genau eine Bäckerfiliale.<br/>heißt <b>1:1</b>-Beziehung</li>
+		</ul></li>
+		<li><b>Constraints</b>: <p>
+			Geben Rahmenbedingungen für das Attribut an. Hier sind sie aufgelistet:
+		</p>
+		<ul>
+			<p><code><purple>NOT NULL</purple></code>: Es <i>muss</i> immer ein Wert für dieses Attribut angegeben werden.</p>
+			<p><code><purple>AUTO INCREMENT</purple></code>: Zählt beim Erstellen neuer Datensätze den Wert bei Zahlattributen hoch. Hiermit kann vermieden werden, dass für Primärschlüssel oder <code><purple>NOT NULL</purple></code>-Attribute ein Wert angegeben werden muss.</p>
+			<p><code><purple>UNIQUE</purple></code>: Der Wert muss einzigartig sein.</p>
+		</ul></li>
+		<li><b>Datenart</b>: <p>
+			Es gibt drei verschiedene Arten von Daten, denen Attribute von Entitäten zugeordnet werden können: <b>Stammdaten, Bewegungsdaten und Prozessdaten.</b>
+		</p>
+		<ul>
+			<p>
+				<b>Stammdaten</b> sind Daten, die entweder komplett fest und unveränderlich sind (z.B. ein Geburtsdatum) oder sich nur sehr selten verändern (z.B. E-Mail-Addresse eines Online-Accounts).
+			</p>
+			<p>
+				<b>Bewegungsdaten</b> sind Daten, die sich <i>regelmäßig</i> und <i>ereignisbasiert</i> verändern. (z.B. die Anzahl von Tischlampen, die ein Online-Shop noch auf Lager hat)
+			</p>
+			<p>
+				<b>Prozessdaten</b> sind Daten, die sich <i>regelmäßig</i> und <i>fortlaufend</i> verändern. Sie stellen das Fortschreiten eines Prozesses dar. (z.B. bis zu welcher Minute du einen Podcast schon gehört hast)
+			</p>
+		</ul></li>
+		<li><b>Datenbank (DB)</b>: <p>
+			Unter Datenbanken versteht man in der Informatik jegliches System, welches das organisierte Speichern, Abrufen und Verändern von Daten erlaubt. Es gibt viele verschiedene Möglichkeiten, solch ein System zu erstellen. Dies ist auch immer von der Art der zu speichernden Daten abhängig. Dieses Portfolio wird ausschließlich die relationalen Datenbanken thematisieren. Sie sind eine häufige Wahl für viele verschiedene Anwendungsmöglichkeiten.
+		</p></li>
+		<li><b>Datenbankanforderung</b>: <p>
+			Während an eine Datenbank und ihr Datenbanksystem in realen Szenarios viele individuelle und spezifischere Anforderungen gestellt werden, können die grundlegenden strukturellen Anforderungen an die Datenbank alleine neben der Anomaliefreiheit auf zwei allgemeine reduziert werden: <b>Datenkonsistenz</b> und <b>Redundanzfreiheit</b>.
+		</p>
+		<ul>
+			<p><b>Datenkonsistenz</b> bedeutet, dass die Datenbank keine widersprüchlichen Daten enthalten darf.</p>
+			<p><b>Redundanzfreiheit</b> bedeutet, dass Daten innerhalb einer Datenbank nicht mehrfach oder unnötig komplex gespeichert werden, also so, dass Speicherplatz optimal genutzt wird.</p>
+		</ul></li>
+		<li><b>Datenbankmanagementsystem (DBMS)</b>: <p>
+			Verwaltet, wer welche Daten der Datenbank lesen, modifizieren und löschen kann. Außerdem verwaltet es Möglichkeiten, auf die Datenbank zuzugreifen, wie beispielsweise eine API.
+		</p></li>
+		<li><b>Datenbanksprachen</b>: <p>Datenbanksprachen werden verwendet, um aus einer Datenbank Informationen auszulesen, zu löschen und zu modifizieren. Es gibt sehr viele, sowohl für relationale als auch für andere Datenbanken. Die meisten Datenbanksprachen für relationale Datenbanken sind Dialekte von <b>SQL (Structured Query Language)</b>, wie beispielsweise CQL, MySQL, PostgreSQL, sqlite und viele mehr.</p></li>
+		<li><b>Datenbanksystem (DBS)</b>: <p>
+			Gemeinsamer Zusammenschluss aus Datenbankmanagementsystem (DBMS) und Datenbank (DB).
+		</p></li>
+		<li><b>Datenschutz</b>: <p>
+			Bedeutet das <i>Schützen</i> von Daten <i>vor unerlaubtem Zugriff.</i> Dafür muss Zugriff auf Daten verwaltet werden, wie beispielsweise, was für Nutzer/Mitarbeiter was für Zugriff <i>(Lese-/Schreib-/Löschzugriff "rwx")</i> auf welche Tabellen haben.
+		</p></li>
+		<li><b>Datensicherheit</b>: <p>
+			Bedeutet die <i>Sicherung des unbeschädigten Fortbestehens</i> von Daten.
+		</p></li>
+		<li><b>Datentyp</b>: </li>
+		<li><b>Entität/Tabelle</b>: </li>
+		<li><b>Entity-Relationship-Modell (ER-Modell, ERM)</b>: </li>
+		<li><b>Fremdschlüssel</b>: </li>
+		<li><b>JOINs</b>: </li>
+		<li><b>Normalform/Normalisierung</b>: </li>
+		<li><b>Objekt</b>: </li>
+		<li><b>Primärschlüssel</b>: </li>
+		<li><b>Relationale Datenbanken</b>: </li>
+		<li><b>SQL (Structured Query Language)</b>: </li>
+	</ul>
+	<div class="title-primary" id="praxis">Praxisanwendung</div>
+	<div class="title-secondary" id="praxis-erm">ER-Modell</div>
+	<img src="resources/images/erm-praxis.png" class="large-image"/>
+	<div class="title-secondary" id="praxis-sql">Beispielabfrage</div>
+	<p>Wieviele verschiedene Backwaren verkauft jede Filiale?</p>
+	<code><red>SELECT</red> <blue>Filiale</blue>.Ort, <blue>Filiale</blue>.Straße, <blue>Filiale</blue>.HausNr, <green>COUNT</green>(<blue>FilialeBackware</blue>.Backware)
+		<br><red>FROM</red> <blue>Filiale</blue>, <blue>FilialeBackware</blue>
+		<br><red>WHERE</red> <blue>Filiale</blue>.FilialNr = <blue>FilialeBackware</blue>.FilialNr
+		<br><purple>GROUP BY</purple> <blue>FilialeBackware</blue>.FilialNr;
+	</code>
 </p>
